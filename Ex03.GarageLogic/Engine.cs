@@ -15,5 +15,10 @@ namespace Ex03.GarageLogic
         {
             m_MaxEnergy = i_MaxEnergy;
         }
+
+        public void AddEnergy(float i_AmountOfEnergy)
+        {
+
+        }
     }
 }
