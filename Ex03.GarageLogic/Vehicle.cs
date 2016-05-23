@@ -8,11 +8,11 @@ namespace Ex03.GarageLogic
 {
     class Vehicle
     {
-        string m_Name;
-        string m_Id;
-        float m_EnergyLevelInPercents;
-        List<Tier> m_Tiers;
-        Engine m_Engine;
+        protected string m_Name;
+        protected string m_Id;
+        protected float m_EnergyLevelInPercents;
+        protected List<Tier> m_Tiers;
+        protected Engine m_Engine;
 
         public Vehicle(string i_Name, string i_Id,
                         List<Tier> i_Tiers, Engine i_Engine)

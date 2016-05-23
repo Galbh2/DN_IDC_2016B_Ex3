@@ -8,8 +8,8 @@ namespace Ex03.GarageLogic
 {
     class Truck : Vehicle
     {
-        bool m_Danger;
-        float m_MaxWeight;
+        protected bool m_Danger;
+        protected float m_MaxWeight;
 
         public Truck(string i_Name, string i_Id, float i_EnergyLevel, List<Tier> i_Tiers, 
                     Engine i_Engine, bool i_Danger, float i_MaxWeight) 

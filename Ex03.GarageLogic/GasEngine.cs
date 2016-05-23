@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic
 {
     class GasEngine : Engine
     {
-        eGasType m_GasType;
+        protected eGasType m_GasType;
 
         public GasEngine(float i_MaxEnergy, eGasType i_GasType) : base(i_MaxEnergy)
         {

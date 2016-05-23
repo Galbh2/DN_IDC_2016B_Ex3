@@ -8,8 +8,8 @@ namespace Ex03.GarageLogic
 {
     class Engine
     {
-        float m_EnergyLevel;
-        float m_MaxEnergy;
+        protected float m_EnergyLevel;
+        protected float m_MaxEnergy;
 
         public Engine(float i_MaxEnergy)
         {
