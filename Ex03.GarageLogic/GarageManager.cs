@@ -32,6 +32,20 @@ namespace Ex03.GarageLogic
             return null;
         }
 
+        public void changeVehicleStatus(string i_Id, eStatus i_Status)
+        {
+
+        }
+
+        public void pumpToMax(string i_Id)
+        {
+
+        }
+
+
+
+
+
 
     }
 

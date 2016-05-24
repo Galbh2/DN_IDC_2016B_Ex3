@@ -13,6 +13,7 @@ namespace Ex03.GarageLogic
         protected float m_EnergyLevelInPercents;
         protected List<Tier> m_Tiers;
         protected Engine m_Engine;
+        protected eStatus m_Status;
 
         public Vehicle(string i_Name, string i_Id,
                         List<Tier> i_Tiers, Engine i_Engine)
@@ -22,5 +23,11 @@ namespace Ex03.GarageLogic
             m_Tiers = i_Tiers;
             m_Engine = i_Engine;
         }
+    }
+
+    public enum eStatus
+    {
+        ready,
+        not_ready
     }
 }
