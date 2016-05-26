@@ -18,11 +18,24 @@ namespace Ex03.GarageLogic
             m_Airpressure = i_Airpressure;
             m_MaxAirPressure = i_MaxAirPressure;
         }
-
-        public void Pump()
+        
+        public bool Pump(float i_AddToAirpressure)
         {
+           float newAirPressure = m_Airpressure + i_AddToAirpressure;
+            bool isAdded = false;
+            if(newAirPressure <= m_MaxAirPressure)
+            {
+                m_Airpressure = newAirPressure;
+                isAdded = true;
+            }
+            return isAdded;
 
         }
-        
+
+        public override string ToString()
+        {
+            return string.Format("Manufacturer : {1}\nMax Airpressure : {2}\nCurrent Airpressure : {3}", m_Manufactor, m_MaxAirPressure, m_Airpressure);
+        }
+
     }
 }

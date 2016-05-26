@@ -23,6 +23,12 @@ namespace Ex03.GarageLogic
             m_Tiers = i_Tiers;
             m_Engine = i_Engine;
         }
+
+        public override string ToString()
+        {
+            string tiers = "";
+            return string.Format("Id : {1}\nName : {2}\nTiers : {3}", m_Id, m_Name,tiers);
+        }
     }
 
     public enum eStatus
