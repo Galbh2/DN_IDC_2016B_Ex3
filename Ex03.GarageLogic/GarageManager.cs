@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Ex03.GarageLogic
 {
 
-    class GarageManager
+    public class GarageManager
     {
         private readonly int BUFFER_SIZE = 100;
         private List<Vehicle> m_Vehicles;
@@ -42,11 +42,25 @@ namespace Ex03.GarageLogic
 
         }
 
+        public bool doQuery(string v)
+        {
+            throw new NotImplementedException();
+        }
 
+        public void charge(string v1, string v2)
+        {
+            throw new NotImplementedException();
+        }
 
+        public void fuel(string v1, string v2, string v3)
+        {
+            throw new NotImplementedException();
+        }
 
-
-
+        public void pump(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public enum eType

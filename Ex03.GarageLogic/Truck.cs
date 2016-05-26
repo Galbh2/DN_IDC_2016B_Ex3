@@ -13,7 +13,7 @@ namespace Ex03.GarageLogic
 
         public Truck(string i_Name, string i_Id, float i_EnergyLevel, List<Tier> i_Tiers, 
                     Engine i_Engine, bool i_Danger, float i_MaxWeight) 
-                    : base(i_Name, i_Id, i_EnergyLevel, i_Tiers, i_Engine)
+                    : base(i_Name, i_Id, i_Tiers, i_Engine)
         {
             m_Danger = i_Danger;
             m_MaxWeight = i_MaxWeight;
