@@ -25,7 +25,13 @@ namespace Ex03.GarageLogic
             return isAdded;
 
         }
-       
+
+
+        public override string ToString()
+        {
+            return string.Format("Max Energy : {1}\nCurrent Energy : {2}\n", m_MaxEnergy, m_EnergyLevel);
+        }
+
 
 
     }

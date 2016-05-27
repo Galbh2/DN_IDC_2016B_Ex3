@@ -10,11 +10,11 @@ namespace Ex03.GarageLogic
     public class GarageManager
     {
         private readonly int BUFFER_SIZE = 100;
-        private List<Vehicle> m_Vehicles;
+        private List<GarageItem> m_GarageItems;
 
         public GarageManager()
         {
-            m_Vehicles = new List<Vehicle>(BUFFER_SIZE);
+            m_GarageItems = new List<GarageItem>(BUFFER_SIZE);
         }
 
         public void addVehicle(string i_Id, eType i_Type)

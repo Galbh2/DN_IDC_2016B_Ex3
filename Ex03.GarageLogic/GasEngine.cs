@@ -31,6 +31,11 @@ namespace Ex03.GarageLogic
             }
             return isAdded;
         }
+
+        public override string ToString()
+        {
+            return string.Format("Max Energy : {1}\nCurrent Energy : {2}\nGas Type : {3}\n", m_MaxEnergy, m_EnergyLevel,m_GasType);
+        }
     }
 
     public enum eGasType

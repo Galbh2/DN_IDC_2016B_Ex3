@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class Vehicle
+     class Vehicle
     {
         protected string m_Name;
         protected string m_Id;
@@ -26,14 +26,15 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            string tiers = "";
-            return string.Format("Id : {1}\nName : {2}\nTiers : {3}", m_Id, m_Name,tiers);
+    
+            return string.Format("Id : {1}\nName : {2}\nGarage Status : {3}\nTiers Details : {4}\nEngine Details : {5}\n", m_Id, m_Name,m_Status,m_Tiers.ToString(),m_Engine.ToString());
         }
     }
 
     public enum eStatus
     {
         ready,
-        not_ready
+        not_ready,
+        Paid
     }
 }

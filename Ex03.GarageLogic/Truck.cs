@@ -18,5 +18,12 @@ namespace Ex03.GarageLogic
             m_Danger = i_Danger;
             m_MaxWeight = i_MaxWeight;
         }
+
+
+        public override string ToString()
+        {
+            string truckDetails = string.Format("Has Dangerous stuff : {1}\nMax Weight : {2}\n", m_Danger, m_MaxWeight);
+            return base.ToString() + truckDetails;
+        }
     }
 }

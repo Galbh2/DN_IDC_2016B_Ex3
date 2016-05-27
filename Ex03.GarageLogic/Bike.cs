@@ -18,7 +18,15 @@ namespace Ex03.GarageLogic
             m_EngineSize = i_EngineSize;
             m_LicenseType = i_LicenseType;
         }
+
+        public override string ToString()
+        {
+            string bikeDetails = string.Format("Engine Size : {1}\nLicense Type : {2}\n", m_EngineSize, m_LicenseType);
+            return base.ToString() + bikeDetails;
+        }
     }
+
+   
     
     public enum eLicenseType
     {
