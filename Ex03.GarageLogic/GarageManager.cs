@@ -17,11 +17,6 @@ namespace Ex03.GarageLogic
             m_GarageItems = new List<GarageItem>(BUFFER_SIZE);
         }
 
-        public void addVehicle(string i_Id, eType i_Type)
-        {
-            //TODO: check about all the different parameters
-        }
-
         public List<string> getVehiclesId()
         {
             return null;
@@ -42,24 +37,39 @@ namespace Ex03.GarageLogic
 
         }
 
-        public bool doQuery(string v)
+        public string doQuery(int v)
         {
             throw new NotImplementedException();
         }
 
-        public void charge(string v1, string v2)
+        public void charge(int v1, float v2)
         {
             throw new NotImplementedException();
         }
 
-        public void fuel(string v1, string v2, string v3)
+        public void fuel(int v1, float v2, string v3)
         {
             throw new NotImplementedException();
         }
 
-        public void pump(string v)
+        public void pump(int v)
         {
             throw new NotImplementedException();
+        }
+
+        public void modify(int v1, string v2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void list(int v, bool doFilter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void add(int i_Id, string v)
+        {
+            System.Console.WriteLine(v);
         }
     }
 

@@ -13,17 +13,26 @@ namespace Ex03.ConsoleUi
     {
         private string m_UnknownVerbMsg = "Unknown verb, enter help for more information";
         private string m_MissingKeyMsg = "Missing parameter {0}";
+        private string m_HelloMsg = "Welcome! Enter one command per line";
 
         private GarageManager manager;
       
 
         public static void Main()
         {
-            System.Console.WriteLine("Enter Command...");
-            String input = System.Console.ReadLine();
             Cmd cmd = new Cmd();
-            cmd.parse(input);
-            System.Console.ReadLine();
+            cmd.Start();
+        }
+
+        public void Start()
+        {
+            manager = new GarageManager();
+            wl(m_HelloMsg);
+            string input;
+            while (!(input = System.Console.ReadLine()).Equals("Q"))
+            {
+                run(parse(input));
+            }
         }
 
         public Dictionary<string, string > parse(String i_Input)
@@ -35,10 +44,13 @@ namespace Ex03.ConsoleUi
 
             dict.Add("verb", input[0]);
 
-            for (int i = 1; i < input.Length; i += 2)
+            if (input.Length > 2)
             {
-                dict.Add(input[i], input[i + 1]);
-                // TODO: check for duplicates
+                for (int i = 1; i < input.Length; i += 2)
+                {
+                    dict.Add(input[i], input[i + 1]);
+                    // TODO: check for duplicates
+                }
             }
 
             foreach (KeyValuePair<string, string> entry in dict)
@@ -93,11 +105,12 @@ namespace Ex03.ConsoleUi
 
             try
             {
-                System.Console.WriteLine(manager.doQuery(i_Dict["-id"]));
+                wl(manager.doQuery
+                    (parseToInt("id", i_Dict["-id"])));
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                wl(e.Message);
             }
         }
 
@@ -111,11 +124,12 @@ namespace Ex03.ConsoleUi
 
             try
             {
-                manager.charge(i_Dict["-id"], i_Dict["-minutes"]);
+                manager.charge(parseToInt("id", i_Dict["-id"]),
+                               parseToFloat("minutes", i_Dict["-minutes"]));
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                wl(e.Message); 
             }
         }
 
@@ -129,11 +143,13 @@ namespace Ex03.ConsoleUi
 
             try
             {
-                manager.fuel(i_Dict["-id"], i_Dict["-amount"], i_Dict["-ftype"]);
+                manager.fuel(parseToInt("id", i_Dict["-id"]), 
+                            parseToFloat("amount", i_Dict["-amount"]), 
+                            i_Dict["-ftype"]);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                wl(e.Message);
             }
         }
 
@@ -147,28 +163,66 @@ namespace Ex03.ConsoleUi
 
             try
             {
-                manager.pump(i_Dict["-id"]);
+                manager.pump(parseToInt("id", i_Dict["-id"]));
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                wl(e.Message);
             }
         }
 
         private void modify(Dictionary<string, string> i_Dict)
         {
-            throw new NotImplementedException();
+            string[] keys = { "-id", "-status" };
+            if (!validateKeys(keys, i_Dict))
+            {
+                return;
+            }
+
+            try
+            {
+                manager.modify(parseToInt("id", i_Dict["-id"]),
+                                i_Dict["-status"]);
+            }
+            catch (Exception e)
+            {
+                wl(e.Message);
+            }
         }
 
         private void printList(Dictionary<string, string> i_Dict)
         {
-            throw new NotImplementedException();
+
+            string filter;
+            bool doFilter = i_Dict.TryGetValue("-filter", out filter);
+
+            try
+            {
+                manager.list(parseToInt("id", i_Dict["-id"]), doFilter);
+            }
+            catch (Exception e)
+            {
+                wl(e.Message);
+            }
         }
 
         private void add(Dictionary<string, string> i_Dict)
         {
-            string[] keys = { "-type" };
-            // pass a dict to garage manager
+            string[] keys = { "-id", "-type" };
+            if (!validateKeys(keys, i_Dict))
+            {
+                return;
+            }
+
+            try
+            {
+                manager.add(parseToInt("-id", i_Dict["id"]),
+                    i_Dict["-type"]);
+            }
+            catch (Exception e)
+            {
+                wl(e.Message);
+            }
         }
 
         private bool validateKeys(string[] i_Keys, Dictionary<string,string> i_Dict)
@@ -185,6 +239,37 @@ namespace Ex03.ConsoleUi
             }
 
             return hasKey;
+        }
+
+        private int parseToInt(string key, string i_Input)
+        {
+            try
+            {
+                return int.Parse(i_Input);
+            }
+            catch (FormatException)
+            {
+
+                throw new FormatException(String.Format("Parameter {0} must be an int", key));
+            }
+        }
+
+        private float parseToFloat(string key, string i_Input)
+        {
+            try
+            {
+                return float.Parse(i_Input);
+            }
+            catch (FormatException)
+            {
+
+                throw new FormatException(String.Format("Parameter {0} must be a float", key));
+            }
+        }
+
+        private void wl (string i_Input)
+        {
+            System.Console.WriteLine(i_Input);
         }
     }
 }
