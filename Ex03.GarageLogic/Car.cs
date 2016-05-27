@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {   
-    class Car : Vehicle
+     class Car : Vehicle
     {
         protected eColor m_Color;
         protected eDoors m_Doors;
@@ -23,7 +23,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            string carDetails = string.Format("Car Color : {1}\nNumber Of Doors : {2}\n", m_Color, m_Doors);
+            string carDetails = string.Format("Car Color : {0}\nNumber Of Doors : {1}\n", m_Color, m_Doors);
             return base.ToString() + carDetails;
         }
     }

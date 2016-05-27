@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class Tier
+     class Tier
     {
         private string m_Manufactor;
         private float m_Airpressure;
@@ -34,7 +34,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("Manufacturer : {1}\nMax Airpressure : {2}\nCurrent Airpressure : {3}", m_Manufactor, m_MaxAirPressure, m_Airpressure);
+            return string.Format("Manufacturer : {0}\nMax Airpressure : {1}\nCurrent Airpressure : {2}", m_Manufactor, m_MaxAirPressure, m_Airpressure);
         }
 
     }

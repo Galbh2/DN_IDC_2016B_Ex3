@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class ElectricEngine : Engine
+     class ElectricEngine : Engine
     {
         public ElectricEngine(float i_MaxEnergy,float i_EnergyLevel) : base(i_MaxEnergy,i_EnergyLevel)
         {
@@ -29,7 +29,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("Max Energy : {1}\nCurrent Energy : {2}\n", m_MaxEnergy, m_EnergyLevel);
+            return string.Format("Max Energy : {0}\nCurrent Energy : {1}\n", m_MaxEnergy, m_EnergyLevel);
         }
 
 

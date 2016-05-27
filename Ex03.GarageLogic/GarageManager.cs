@@ -17,21 +17,6 @@ namespace Ex03.GarageLogic
             m_GarageItems = new List<GarageItem>(BUFFER_SIZE);
         }
 
-        public List<string> getVehiclesId()
-        {
-            return null;
-        }
-
-        public List<string> getVehiclesId(eStatus i_Status)
-        {
-            return null;
-        }
-
-        public void changeVehicleStatus(string i_Id, eStatus i_Status)
-        {
-
-        }
-
         public void pumpToMax(string i_Id)
         {
 

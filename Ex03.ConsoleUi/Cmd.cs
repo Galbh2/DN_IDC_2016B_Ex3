@@ -16,10 +16,11 @@ namespace Ex03.ConsoleUi
         private string m_HelloMsg = "Welcome! Enter one command per line";
 
         private GarageManager manager;
-      
+
 
         public static void Main()
         {
+
             Cmd cmd = new Cmd();
             cmd.Start();
         }
@@ -29,13 +30,24 @@ namespace Ex03.ConsoleUi
             manager = new GarageManager();
             wl(m_HelloMsg);
             string input;
+            System.Console.Write("Garage>");
             while (!(input = System.Console.ReadLine()).Equals("Q"))
             {
-                run(parse(input));
+              
+                Dictionary<string, string> dict = parse(input);
+                if (dict != null)
+                {
+                    run(dict);
+                } else
+                {
+                    wl("Wrong Input...");
+                }
+
+                System.Console.Write("Garage>");
             }
         }
 
-        public Dictionary<string, string > parse(String i_Input)
+        public Dictionary<string, string> parse(String i_Input)
         {
             Dictionary<string, string> dict = new Dictionary<string, string>();
 
@@ -44,21 +56,26 @@ namespace Ex03.ConsoleUi
 
             dict.Add("verb", input[0]);
 
-            if (input.Length > 2)
+            if (input.Length > 2 && (input.Length % 2 != 0))
             {
                 for (int i = 1; i < input.Length; i += 2)
                 {
                     dict.Add(input[i], input[i + 1]);
                     // TODO: check for duplicates
                 }
+
+                // for debugging
+
+                foreach (KeyValuePair<string, string> entry in dict)
+                {
+                    System.Console.WriteLine(String.Format("{0}, {1}", entry.Key, entry.Value));
+                }
+
+                return dict;
             }
 
-            foreach (KeyValuePair<string, string> entry in dict)
-            {
-                System.Console.WriteLine(String.Format("{0}, {1}", entry.Key, entry.Value));
-            }
-
-            return dict;
+         
+            return null;
         }
 
         private void run(Dictionary<string, string> i_Dict)
@@ -129,7 +146,7 @@ namespace Ex03.ConsoleUi
             }
             catch (Exception e)
             {
-                wl(e.Message); 
+                wl(e.Message);
             }
         }
 
@@ -143,8 +160,8 @@ namespace Ex03.ConsoleUi
 
             try
             {
-                manager.fuel(parseToInt("id", i_Dict["-id"]), 
-                            parseToFloat("amount", i_Dict["-amount"]), 
+                manager.fuel(parseToInt("id", i_Dict["-id"]),
+                            parseToFloat("amount", i_Dict["-amount"]),
                             i_Dict["-ftype"]);
             }
             catch (Exception e)
@@ -155,7 +172,7 @@ namespace Ex03.ConsoleUi
 
         private void pump(Dictionary<string, string> i_Dict)
         {
-            string[] keys = { "-id"};
+            string[] keys = { "-id" };
             if (!validateKeys(keys, i_Dict))
             {
                 return;
@@ -225,7 +242,7 @@ namespace Ex03.ConsoleUi
             }
         }
 
-        private bool validateKeys(string[] i_Keys, Dictionary<string,string> i_Dict)
+        private bool validateKeys(string[] i_Keys, Dictionary<string, string> i_Dict)
         {
             bool hasKey = true;
 
@@ -267,7 +284,7 @@ namespace Ex03.ConsoleUi
             }
         }
 
-        private void wl (string i_Input)
+        private void wl(string i_Input)
         {
             System.Console.WriteLine(i_Input);
         }

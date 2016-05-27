@@ -34,7 +34,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("Max Energy : {1}\nCurrent Energy : {2}\nGas Type : {3}\n", m_MaxEnergy, m_EnergyLevel,m_GasType);
+            return string.Format("Max Energy : {0}\nCurrent Energy : {1}\nGas Type : {2}\n", m_MaxEnergy, m_EnergyLevel,m_GasType);
         }
     }
 
