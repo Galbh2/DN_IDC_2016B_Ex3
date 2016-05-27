@@ -13,7 +13,7 @@ namespace Ex03.GarageLogic
         protected float m_EnergyLevelInPercents;
         protected List<Tier> m_Tiers;
         protected Engine m_Engine;
-        protected eStatus m_Status;
+       
 
         public Vehicle(string i_Name, string i_Id,
                         List<Tier> i_Tiers, Engine i_Engine)
@@ -27,14 +27,9 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
     
-            return string.Format("Id : {1}\nName : {2}\nGarage Status : {3}\nTiers Details : {4}\nEngine Details : {5}\n", m_Id, m_Name,m_Status,m_Tiers.ToString(),m_Engine.ToString());
+            return string.Format("Id : {0}\nName : {1}\nTiers Details : {2}\nEngine Details : \n{2}", m_Id, m_Name,m_Tiers.ToString(),m_Engine.ToString());
         }
     }
 
-    public enum eStatus
-    {
-        ready,
-        not_ready,
-        Paid
-    }
+    
 }

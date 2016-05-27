@@ -13,18 +13,30 @@ namespace Ex03.ConsoleUi
     {
         private string m_UnknownVerbMsg = "Unknown verb, enter help for more information";
         private string m_MissingKeyMsg = "Missing parameter {0}";
-
         private GarageManager manager;
       
-
+/*
         public static void Main()
         {
+            
             System.Console.WriteLine("Enter Command...");
             String input = System.Console.ReadLine();
             Cmd cmd = new Cmd();
             cmd.parse(input);
             System.Console.ReadLine();
         }
+        */
+
+            public static void Main()
+        {
+            Vehicle a = CreateObject.createElectricCar();
+            string asas = a.ToString();
+            System.Console.WriteLine(asas);
+            System.Console.ReadLine();
+        }
+
+
+
 
         public Dictionary<string, string > parse(String i_Input)
         {

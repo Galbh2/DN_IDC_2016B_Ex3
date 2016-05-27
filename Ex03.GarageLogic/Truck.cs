@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class Truck : Vehicle
+     class Truck : Vehicle
     {
         protected bool m_Danger;
         protected float m_MaxWeight;
@@ -22,7 +22,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            string truckDetails = string.Format("Has Dangerous stuff : {1}\nMax Weight : {2}\n", m_Danger, m_MaxWeight);
+            string truckDetails = string.Format("Has Dangerous stuff : {0}\nMax Weight : {1}\n", m_Danger, m_MaxWeight);
             return base.ToString() + truckDetails;
         }
     }

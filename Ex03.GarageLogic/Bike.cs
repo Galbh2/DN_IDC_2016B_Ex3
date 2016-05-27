@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class Bike : Vehicle
+      class Bike : Vehicle
     {
         protected int m_EngineSize;
         protected eLicenseType m_LicenseType;
@@ -21,7 +21,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            string bikeDetails = string.Format("Engine Size : {1}\nLicense Type : {2}\n", m_EngineSize, m_LicenseType);
+            string bikeDetails = string.Format("Engine Size : {0}\nLicense Type : {1}\n", m_EngineSize, m_LicenseType);
             return base.ToString() + bikeDetails;
         }
     }
