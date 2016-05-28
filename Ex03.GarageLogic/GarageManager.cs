@@ -9,12 +9,12 @@ namespace Ex03.GarageLogic
 
     public class GarageManager
     {
-        private readonly int BUFFER_SIZE = 100;
-        private List<GarageItem> m_GarageItems;
+        
+        private Dictionary<string, GarageItem> m_GarageItems;
 
         public GarageManager()
         {
-            m_GarageItems = new List<GarageItem>(BUFFER_SIZE);
+            m_GarageItems = new Dictionary<string, GarageItem>();
         }
 
         public void pumpToMax(string i_Id)
@@ -42,20 +42,28 @@ namespace Ex03.GarageLogic
             throw new NotImplementedException();
         }
 
-        public void modify(string v1, string v2)
+        public void modify(string i_Id, eStatus i_Status)
         {
-            throw new NotImplementedException();
+            GarageItem item = getById(i_Id);
+           
+            if (item == null)
+            {
+                throw new ArgumentException("Entry was not found...");
+            } else
+            {
+                item.Status = i_Status; 
+            }
         }
 
         public List<string[]> list(eStatus i_Filter)
         {
             List<string[]> results = new List<string[]>();
 
-            foreach (GarageItem item in m_GarageItems)
+            foreach (KeyValuePair<string, GarageItem> item in m_GarageItems)
             {
-                if (item.Status == i_Filter)
+                if (item.Value.Status == i_Filter)
                 {
-                    string[] entry = { item.Id, item.Status.ToString()};
+                    string[] entry = { item.Value.Id, item.Value.Status.ToString()};
                     results.Add(entry);
                 }
             }
@@ -67,23 +75,44 @@ namespace Ex03.GarageLogic
         {
             List<string[]> results = new List<string[]>();
 
-            foreach (GarageItem item in m_GarageItems)
+            foreach (KeyValuePair<string, GarageItem> item in m_GarageItems)
             {
-                string[] entry = { item.Id, item.Status.ToString() };
+                string[] entry = { item.Value.Id, item.Value.Status.ToString() };
                 results.Add(entry);
             }
 
             return results;
         }
 
-        public void add(string i_Id, string i_Type,
+        public bool add(string i_Id, string i_Type,
+                string i_Owner, string i_Phone,
+                Dictionary<string, string> i_Properties)
+        {
+            GarageItem item = getById(i_Id);
+            bool exist = true;
+            if (item == null)
+            {
+                // create a new entry
+                _add(i_Id, i_Type, i_Owner, i_Phone, i_Properties);
+                return !exist;
+            }
+            else
+            {
+                // put in mainteinance
+
+                item.Status = eStatus.maintenance;
+                return exist;
+            }
+        }
+
+        public void _add(string i_Id, string i_Type,
                         string i_Owner, string i_Phone,
                         Dictionary<string, string> i_Properties)
         {
             switch (i_Type)
             {
                 case ("truck"):
-                    m_GarageItems.Add(new GarageItem(
+                    m_GarageItems.Add(i_Id, new GarageItem(
                                       new Truck(i_Properties),
                                       i_Owner,
                                       i_Phone));
@@ -92,6 +121,13 @@ namespace Ex03.GarageLogic
                     throw new ArgumentException(
                            string.Format("Cannot add a {0}", i_Type));
             }
+        }
+
+        private GarageItem getById(string i_Id)
+        {
+            GarageItem item;
+            m_GarageItems.TryGetValue(i_Id, out item);
+            return item;
         }
        
     }

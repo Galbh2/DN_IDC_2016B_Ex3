@@ -14,6 +14,7 @@ namespace Ex03.ConsoleUi
         private string m_UnknownVerbMsg = "Unknown verb, enter help for more information";
         private string m_MissingKeyMsg = "Missing parameter {0}";
         private string m_HelloMsg = "Welcome! Enter one command per line";
+        private string m_ExistMsg = "Putting {0} in mainteinance";
         private readonly string m_NL = Environment.NewLine;
 
         private GarageManager manager;
@@ -203,7 +204,7 @@ namespace Ex03.ConsoleUi
             try
             {
                 manager.modify(i_Dict["-id"],
-                                i_Dict["-status"]);
+                                parseToStatus(i_Dict["-status"]));
             }
             catch (Exception e)
             {
@@ -255,11 +256,16 @@ namespace Ex03.ConsoleUi
 
             try
             {
-                manager.add(i_Dict["-id"],
+                bool exist = manager.add(i_Dict["-id"],
                             i_Dict["-type"],
                             i_Dict["-owner"],
                             i_Dict["-phone"],
                             i_Dict);
+
+                if (exist)
+                {
+                    wl(string.Format(m_ExistMsg, i_Dict["-id"]));
+                }
             }
 
             catch (ArgumentException e)
