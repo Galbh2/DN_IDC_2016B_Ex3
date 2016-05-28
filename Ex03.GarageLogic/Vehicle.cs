@@ -13,7 +13,8 @@ namespace Ex03.GarageLogic
         protected float m_EnergyLevelInPercents;
         protected List<Tier> m_Tiers;
         protected Engine m_Engine;
-       
+
+        
 
         public Vehicle(string i_Name, string i_Id,
                         List<Tier> i_Tiers, Engine i_Engine)
@@ -22,6 +23,31 @@ namespace Ex03.GarageLogic
             m_Id = i_Id;
             m_Tiers = i_Tiers;
             m_Engine = i_Engine;
+        }
+
+        public Vehicle(Dictionary<string, string> i_Properties)
+        {
+            string[] keys = { "-name",
+                               "-id",
+                            };
+
+            if (!Utils.ValidateKeys(keys, i_Properties))
+            {
+                throw new Exception();
+                //TODO: write custom exceptiom for a missing key
+            }
+
+            m_Id = i_Properties["-id"];
+            m_Name = i_Properties["-name"];
+
+        }
+
+        public string Id
+        {
+            get 
+            {
+                return m_Id;
+            }
         }
 
         public override string ToString()

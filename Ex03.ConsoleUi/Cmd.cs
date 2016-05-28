@@ -122,8 +122,7 @@ namespace Ex03.ConsoleUi
 
             try
             {
-                wl(manager.doQuery
-                    (parseToInt("id", i_Dict["-id"])));
+                wl(manager.doQuery(i_Dict["-id"]));
             }
             catch (Exception e)
             {
@@ -141,7 +140,7 @@ namespace Ex03.ConsoleUi
 
             try
             {
-                manager.charge(parseToInt("id", i_Dict["-id"]),
+                manager.charge(i_Dict["-id"],
                                parseToFloat("minutes", i_Dict["-minutes"]));
             }
             catch (Exception e)
@@ -160,7 +159,7 @@ namespace Ex03.ConsoleUi
 
             try
             {
-                manager.fuel(parseToInt("id", i_Dict["-id"]),
+                manager.fuel(i_Dict["-id"],
                             parseToFloat("amount", i_Dict["-amount"]),
                             i_Dict["-ftype"]);
             }
@@ -180,7 +179,7 @@ namespace Ex03.ConsoleUi
 
             try
             {
-                manager.pump(parseToInt("id", i_Dict["-id"]));
+                manager.pump(i_Dict["-id"]);
             }
             catch (Exception e)
             {
@@ -198,7 +197,7 @@ namespace Ex03.ConsoleUi
 
             try
             {
-                manager.modify(parseToInt("id", i_Dict["-id"]),
+                manager.modify(i_Dict["-id"],
                                 i_Dict["-status"]);
             }
             catch (Exception e)
@@ -215,7 +214,7 @@ namespace Ex03.ConsoleUi
 
             try
             {
-                manager.list(parseToInt("id", i_Dict["-id"]), doFilter);
+                manager.list(doFilter);
             }
             catch (Exception e)
             {
@@ -225,7 +224,7 @@ namespace Ex03.ConsoleUi
 
         private void add(Dictionary<string, string> i_Dict)
         {
-            string[] keys = { "-id", "-type" };
+            string[] keys = { "-id", "-type", "-phone", "-owner" };
             if (!validateKeys(keys, i_Dict))
             {
                 return;
@@ -233,16 +232,20 @@ namespace Ex03.ConsoleUi
 
             try
             {
-                manager.add(parseToInt("-id", i_Dict["id"]),
-                    i_Dict["-type"]);
+                manager.add(i_Dict["-id"],
+                            i_Dict["-type"],
+                            i_Dict["-owner"],
+                            i_Dict["-phone"],
+                            i_Dict);
             }
+
             catch (Exception e)
             {
                 wl(e.Message);
             }
         }
 
-        private bool validateKeys(string[] i_Keys, Dictionary<string, string> i_Dict)
+        public bool validateKeys(string[] i_Keys, Dictionary<string, string> i_Dict)
         {
             bool hasKey = true;
 

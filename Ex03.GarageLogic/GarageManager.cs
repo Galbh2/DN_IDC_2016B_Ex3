@@ -22,40 +22,54 @@ namespace Ex03.GarageLogic
 
         }
 
-        public string doQuery(int v)
+        public string doQuery(string v)
         {
             throw new NotImplementedException();
         }
 
-        public void charge(int v1, float v2)
+        public void charge(string v1, float v2)
         {
             throw new NotImplementedException();
         }
 
-        public void fuel(int v1, float v2, string v3)
+        public void fuel(string v1, float v2, string v3)
         {
             throw new NotImplementedException();
         }
 
-        public void pump(int v)
+        public void pump(string v)
         {
             throw new NotImplementedException();
         }
 
-        public void modify(int v1, string v2)
+        public void modify(string v1, string v2)
         {
             throw new NotImplementedException();
         }
 
-        public void list(int v, bool doFilter)
+        public void list(bool doFilter)
         {
             throw new NotImplementedException();
         }
 
-        public void add(int i_Id, string v)
+        public void add(string i_Id, string i_Type,
+                        string i_Owner, string i_Phone,
+                        Dictionary<string, string> i_Properties)
         {
-            System.Console.WriteLine(v);
+            switch (i_Type)
+            {
+                case ("truck"):
+                    m_GarageItems.Add(new GarageItem(
+                                      new Truck(i_Properties),
+                                      i_Owner,
+                                      i_Phone));
+                    break;
+                default:
+                    throw new ArgumentException(
+                           string.Format("Cannot add a {0}", i_Type));
+            }
         }
+       
     }
 
     public enum eType

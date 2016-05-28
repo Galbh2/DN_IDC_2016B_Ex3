@@ -20,7 +20,6 @@ namespace Ex03.GarageLogic
             m_Doors = i_Doors;
         }
 
-
         public override string ToString()
         {
             string carDetails = string.Format("Car Color : {0}\nNumber Of Doors : {1}\n", m_Color, m_Doors);

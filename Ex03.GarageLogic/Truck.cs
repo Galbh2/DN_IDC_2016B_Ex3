@@ -19,6 +19,22 @@ namespace Ex03.GarageLogic
             m_MaxWeight = i_MaxWeight;
         }
 
+        public Truck(Dictionary<string, string> i_Properties) : base(i_Properties)
+        {
+            
+            string[] keys = { "-danger", "-maxWeight" };
+
+            if (!Utils.ValidateKeys(keys, i_Properties))
+            {
+                throw new Exception();
+                //TODO: write custom exceptiom for a missing key
+            }
+
+            m_Danger = Utils.ParseToBool("danger", i_Properties["-danger"]);
+            m_MaxWeight = Utils.ParseToFloat("MaxWeight", i_Properties["-maxWeight"]);
+            this.ToString();
+        }
+
 
         public override string ToString()
         {
