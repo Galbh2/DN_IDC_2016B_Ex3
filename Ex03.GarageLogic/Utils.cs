@@ -9,7 +9,9 @@ namespace Ex03.GarageLogic
     public class Utils
     {
 
-        public static bool ValidateKeys(string[] i_Keys, Dictionary<string, string> i_Dict)
+        public static bool ValidateKeys(string[] i_Keys, 
+                                        Dictionary<string, string> i_Dict,
+                                        out string o_MissingKey)
         {
             bool hasKey = true;
 
@@ -17,10 +19,11 @@ namespace Ex03.GarageLogic
             {
                 if (!i_Dict.ContainsKey(key))
                 {
+                    o_MissingKey = key;
                     return !hasKey;
                 }
             }
-
+            o_MissingKey = null; 
             return hasKey;
         }
 

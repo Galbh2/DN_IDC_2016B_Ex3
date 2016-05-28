@@ -47,9 +47,33 @@ namespace Ex03.GarageLogic
             throw new NotImplementedException();
         }
 
-        public void list(bool doFilter)
+        public List<string[]> list(eStatus i_Filter)
         {
-            throw new NotImplementedException();
+            List<string[]> results = new List<string[]>();
+
+            foreach (GarageItem item in m_GarageItems)
+            {
+                if (item.Status == i_Filter)
+                {
+                    string[] entry = { item.Id, item.Status.ToString()};
+                    results.Add(entry);
+                }
+            }
+
+            return results;
+        }
+
+        public List<string[]> list()
+        {
+            List<string[]> results = new List<string[]>();
+
+            foreach (GarageItem item in m_GarageItems)
+            {
+                string[] entry = { item.Id, item.Status.ToString() };
+                results.Add(entry);
+            }
+
+            return results;
         }
 
         public void add(string i_Id, string i_Type,

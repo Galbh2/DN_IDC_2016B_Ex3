@@ -14,6 +14,7 @@ namespace Ex03.ConsoleUi
         private string m_UnknownVerbMsg = "Unknown verb, enter help for more information";
         private string m_MissingKeyMsg = "Missing parameter {0}";
         private string m_HelloMsg = "Welcome! Enter one command per line";
+        private readonly string m_NL = Environment.NewLine;
 
         private GarageManager manager;
 
@@ -33,7 +34,12 @@ namespace Ex03.ConsoleUi
             System.Console.Write("Garage>");
             while (!(input = System.Console.ReadLine()).Equals("Q"))
             {
-              
+                if (input.Equals(""))
+                {
+                    System.Console.Write("Garage>");
+                    continue;
+                }
+
                 Dictionary<string, string> dict = parse(input);
                 if (dict != null)
                 {
@@ -65,17 +71,16 @@ namespace Ex03.ConsoleUi
                 }
 
                 // for debugging
-
+                /*
                 foreach (KeyValuePair<string, string> entry in dict)
                 {
                     System.Console.WriteLine(String.Format("{0}, {1}", entry.Key, entry.Value));
                 }
-
-                return dict;
+                */
             }
 
          
-            return null;
+            return dict;
         }
 
         private void run(Dictionary<string, string> i_Dict)
@@ -209,12 +214,30 @@ namespace Ex03.ConsoleUi
         private void printList(Dictionary<string, string> i_Dict)
         {
 
-            string filter;
-            bool doFilter = i_Dict.TryGetValue("-filter", out filter);
-
             try
             {
-                manager.list(doFilter);
+                string filter;
+                bool doFilter = i_Dict.TryGetValue("-filter", out filter);
+                List<string[]> results = null;
+                if (doFilter)
+                {
+                    eStatus status = parseToStatus(filter);
+                    results = manager.list(status);
+                } else
+                {
+                    results = manager.list();
+                }
+
+                StringBuilder sb = new StringBuilder();
+                sb.Append(string.Format("{0,0}, {1,6} {2}", "Id", "Status", m_NL));
+                foreach (string[] entry in results)
+                {
+                    sb.Append(string.Format("{0,0}, {1,6}", entry[0], entry[1]));
+                    sb.Append(m_NL);
+                }
+               
+                wl(sb.ToString());
+
             }
             catch (Exception e)
             {
@@ -239,11 +262,14 @@ namespace Ex03.ConsoleUi
                             i_Dict);
             }
 
-            catch (Exception e)
+            catch (ArgumentException e)
             {
                 wl(e.Message);
             }
         }
+
+        // Helper function for checking that all the required argument 
+        // are in the dict
 
         public bool validateKeys(string[] i_Keys, Dictionary<string, string> i_Dict)
         {
@@ -260,6 +286,8 @@ namespace Ex03.ConsoleUi
 
             return hasKey;
         }
+
+        // Helper function for parsing strings
 
         private int parseToInt(string key, string i_Input)
         {
@@ -286,6 +314,20 @@ namespace Ex03.ConsoleUi
                 throw new FormatException(String.Format("Parameter {0} must be a float", key));
             }
         }
+
+        private eStatus parseToStatus(string i_Input)
+        {
+            try
+            {
+                return (eStatus)Enum.Parse(typeof(eStatus), i_Input); 
+            }
+            catch (Exception)
+            {
+
+                throw new ArgumentException(String.Format("Parameter {0} not recognized", i_Input));
+            }
+        }
+
 
         private void wl(string i_Input)
         {

@@ -10,6 +10,7 @@ namespace Ex03.GarageLogic
     {
         protected bool m_Danger;
         protected float m_MaxWeight;
+        private string[] m_Keys = { "-danger", "-maxWeight" };
 
         public Truck(string i_Name, string i_Id, float i_EnergyLevel, List<Tier> i_Tiers, 
                     Engine i_Engine, bool i_Danger, float i_MaxWeight) 
@@ -21,18 +22,9 @@ namespace Ex03.GarageLogic
 
         public Truck(Dictionary<string, string> i_Properties) : base(i_Properties)
         {
-            
-            string[] keys = { "-danger", "-maxWeight" };
-
-            if (!Utils.ValidateKeys(keys, i_Properties))
-            {
-                throw new Exception();
-                //TODO: write custom exceptiom for a missing key
-            }
-
+            validateKeys(m_Keys, i_Properties);
             m_Danger = Utils.ParseToBool("danger", i_Properties["-danger"]);
             m_MaxWeight = Utils.ParseToFloat("MaxWeight", i_Properties["-maxWeight"]);
-            this.ToString();
         }
 
 
