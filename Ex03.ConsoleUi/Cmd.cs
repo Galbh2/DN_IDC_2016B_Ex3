@@ -63,11 +63,14 @@ namespace Ex03.ConsoleUi
 
             dict.Add("verb", input[0]);
 
-            if (input.Length > 2 && (input.Length % 2 != 0))
+            if (input.Length > 2)
             {
                 for (int i = 1; i < input.Length; i += 2)
                 {
-                    dict.Add(input[i], input[i + 1]);
+                    if (i + 1 < input.Length)
+                    {
+                        dict.Add(input[i], input[i + 1]);
+                    }
                     // TODO: check for duplicates
                 }
 
